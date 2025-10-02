@@ -10,31 +10,74 @@ class ActionButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        ElevatedButton(
-          onPressed: controller.saveForm,
-          style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-          child: Text('Save'),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.green,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: InkWell(
+            onTap: controller.saveForm,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Text('Save', style: TextStyle(color: Colors.white)),
+            ),
+          ),
         ),
         SizedBox(width: 8),
-        OutlinedButton(
-          onPressed: controller.cancelForm,
-          child: Text('Cancel'),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Theme.of(context).colorScheme.primary),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: InkWell(
+            onTap: controller.cancelForm,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Text('Cancel'),
+            ),
+          ),
         ),
         SizedBox(width: 8),
-        OutlinedButton(
-          onPressed: controller.voidForm,
-          child: Text('Void'),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Theme.of(context).colorScheme.primary),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: InkWell(
+            onTap: controller.voidForm,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Text('Void'),
+            ),
+          ),
         ),
         SizedBox(width: 8),
-        OutlinedButton(
-          onPressed: controller.deleteForm,
-          child: Text('Delete'),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Theme.of(context).colorScheme.primary),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: InkWell(
+            onTap: controller.deleteForm,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Text('Delete'),
+            ),
+          ),
         ),
         Spacer(),
-        ElevatedButton(
-          onPressed: controller.cancelForm,
-          style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-          child: Text('Cancel'),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.red,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: InkWell(
+            onTap: controller.cancelForm,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Text('Cancel', style: TextStyle(color: Colors.white)),
+            ),
+          ),
         ),
       ],
     );

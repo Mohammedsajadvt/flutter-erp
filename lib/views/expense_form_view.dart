@@ -93,29 +93,53 @@ class ExpenseFormView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    flex: 2,
+                    flex: 1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CustomTextField(label: 'Note:', controller: controller.noteController, onChanged: (value) => controller.formData.value.note = value, maxLines: 4),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Note:', style: TextStyle(fontSize: 12)),
+                            SizedBox(width: 8),
+                            Expanded(
+                              child: TextField(
+                                controller: controller.noteController,
+                                onChanged: (value) => controller.formData.value.note = value,
+                                maxLines: 4,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  isDense: true,
+                                  contentPadding: EdgeInsets.all(8),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                         SizedBox(height: 16),
-                        Text('Selected File:', style: TextStyle(fontSize: 12)),
-                        SizedBox(height: 8),
-                        ElevatedButton(
-                          onPressed: () async {
-                            final result = await FilePicker.platform.pickFiles();
-                            if (result != null) {
-                              controller.formData.value.selectedFile = result.files.first.name;
-                            }
-                          },
-                          child: Text('Upload File'),
+                        Row(
+                          children: [
+                            Text('Selected File:', style: TextStyle(fontSize: 12)),
+                            SizedBox(width: 8),
+                            Expanded(
+                              child: TextField(
+                                controller: controller.selectedFileController,
+                                onChanged: (value) => controller.formData.value.selectedFile = value,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  isDense: true,
+                                  contentPadding: EdgeInsets.all(4),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ),
                   SizedBox(width: 32),
                   Expanded(
-                    flex: 1,
+                    flex: 3,
                     child: TotalsSection(controller: controller),
                   ),
                 ],

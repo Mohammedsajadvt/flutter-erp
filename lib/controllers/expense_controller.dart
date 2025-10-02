@@ -9,6 +9,7 @@ class ExpenseController extends GetxController {
 
   var subtotal = 0.0.obs;
   var discount = 0.0.obs;
+  var discountPercent = 0.0.obs;
   var charges = 0.0.obs;
   var tax = 0.0.obs;
   var total = 0.0.obs;
@@ -21,6 +22,15 @@ class ExpenseController extends GetxController {
   TextEditingController customerPOController = TextEditingController();
   TextEditingController vehicleNameController = TextEditingController();
   TextEditingController noteController = TextEditingController();
+  TextEditingController selectedFileController = TextEditingController();
+
+  TextEditingController subtotalController = TextEditingController(text: '0.00');
+  TextEditingController discountAmountController = TextEditingController(text: '0.00');
+  TextEditingController discountPercentController = TextEditingController(text: '0');
+  TextEditingController chargesController = TextEditingController(text: '0.00');
+  TextEditingController taxController = TextEditingController(text: '0.00');
+  TextEditingController roundOffController = TextEditingController(text: '0.00');
+  TextEditingController totalController = TextEditingController(text: '0.00');
 
   TextEditingController newExpenseCodeController = TextEditingController();
   TextEditingController newDescriptionController = TextEditingController();
@@ -60,15 +70,31 @@ class ExpenseController extends GetxController {
     subtotal.value = totalAmount;
     tax.value = items.fold(0.0, (sum, item) => sum + (item.amount * item.quantity * item.tax / 100));
     total.value = subtotal.value + tax.value + charges.value - discount.value;
+
+    subtotalController.text = subtotal.value.toStringAsFixed(2);
+    chargesController.text = charges.value.toStringAsFixed(2);
+    taxController.text = tax.value.toStringAsFixed(2);
+    totalController.text = total.value.toStringAsFixed(2);
+    roundOffController.text = (total.value % 1).toStringAsFixed(2);
+    discountPercent.value = subtotal.value != 0 ? (discount.value / subtotal.value) * 100 : 0;
+    discountPercentController.text = discountPercent.value.toStringAsFixed(0);
+    discountAmountController.text = discount.value.toStringAsFixed(2);
   }
 
   void updateDiscount(double value) {
     discount.value = value;
+    discountPercent.value = subtotal.value != 0 ? (value / subtotal.value) * 100 : 0;
     calculateTotals();
   }
 
   void updateCharges(double value) {
     charges.value = value;
+    calculateTotals();
+  }
+
+  void updateDiscountPercent(double percent) {
+    discountPercent.value = percent;
+    discount.value = subtotal.value * percent / 100;
     calculateTotals();
   }
 
@@ -88,6 +114,14 @@ class ExpenseController extends GetxController {
     customerPOController.clear();
     vehicleNameController.clear();
     noteController.clear();
+    selectedFileController.clear();
+    subtotalController.text = '0.00';
+    discountAmountController.text = '0.00';
+    discountPercentController.text = '0';
+    chargesController.text = '0.00';
+    taxController.text = '0.00';
+    roundOffController.text = '0.00';
+    totalController.text = '0.00';
     newExpenseCodeController.clear();
     newDescriptionController.clear();
     newRefController.clear();
