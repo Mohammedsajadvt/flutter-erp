@@ -11,12 +11,12 @@ class TotalsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() => Column(
       children: [
-        _buildTotalRow('Subtotal', null, value: controller.subtotal.value.toStringAsFixed(2), isBold: false, readOnly: true),
-        _buildTotalRow('Discount', controller.discountPercentController, onChanged: (value) => controller.updateDiscountPercent(double.tryParse(value) ?? 0.0), amountController: controller.discountAmountController, amountOnChanged: (value) => controller.updateDiscount(double.tryParse(value) ?? 0.0), hasPercentage: true, isBold: false),
-        _buildTotalRow('Charges', null, value: controller.charges.value.toStringAsFixed(2), isBold: false, readOnly: true),
-        _buildTotalRow('Tax', controller.taxController, value: controller.tax.value.toStringAsFixed(2), isBold: false, readOnly: true),
-        _buildTotalRow('Round Off', null, value: (controller.total.value % 1).toStringAsFixed(2), isBold: false, readOnly: true),
-        _buildTotalRow('Total', controller.totalController, value: controller.total.value.toStringAsFixed(2), isBold: true, readOnly: true),
+        _buildTotalRow('Subtotal:', null, value: controller.subtotal.value.toStringAsFixed(2), isBold: false, readOnly: true),
+        _buildTotalRow('Discount:', controller.discountPercentController, onChanged: (value) => controller.updateDiscountPercent(double.tryParse(value) ?? 0.0), amountController: controller.discountAmountController, amountOnChanged: (value) => controller.updateDiscount(double.tryParse(value) ?? 0.0), hasPercentage: true, isBold: false),
+        _buildTotalRow('Charges:', null, value: controller.charges.value.toStringAsFixed(2), isBold: false, readOnly: true),
+        _buildTotalRow('Tax:', controller.taxController, value: controller.tax.value.toStringAsFixed(2), isBold: false, readOnly: true),
+        _buildTotalRow('Round Off:', null, value: (controller.total.value % 1).toStringAsFixed(2), isBold: false, readOnly: true),
+        _buildTotalRow('Total:', controller.totalController, value: controller.total.value.toStringAsFixed(2), isBold: true, readOnly: true),
       ],
     ));
   }
@@ -28,7 +28,7 @@ class TotalsSection extends StatelessWidget {
     Widget displayWidget;
     if (readOnly && value != null) {
       displayWidget = SizedBox(
-        width: 80,
+        width: 160,
         child: Container(
           padding: EdgeInsets.all(4),
           decoration: BoxDecoration(
@@ -46,7 +46,7 @@ class TotalsSection extends StatelessWidget {
       );
     } else if (controller != null) {
       displayWidget = SizedBox(
-        width: 80,
+        width: 160,
         child: TextField(
           controller: amountController ?? controller,
           onChanged: amountOnChanged ?? onChanged,
@@ -69,9 +69,13 @@ class TotalsSection extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 1),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(label, style: style),
+          Padding(
+            padding: const EdgeInsets.only(left: 500),
+            child: Text(label, style: style),
+          ),
+          Spacer(),
           Row(
             children: [
               if (hasPercentage) ...[

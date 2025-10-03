@@ -16,10 +16,6 @@ class ExpenseFormView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Expense Form'),
-        backgroundColor: Colors.teal[700],
-      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(16.0),
@@ -139,7 +135,7 @@ class ExpenseFormView extends StatelessWidget {
                   ),
                   SizedBox(width: 32),
                   Expanded(
-                    flex: 3,
+                    flex: 2,
                     child: TotalsSection(controller: controller),
                   ),
                 ],
