@@ -23,7 +23,7 @@ class ExpenseController extends GetxController {
   TextEditingController vehicleNameController = TextEditingController();
   TextEditingController noteController = TextEditingController();
   TextEditingController selectedFileController = TextEditingController();
-
+final TextEditingController billToController = TextEditingController();
   TextEditingController subtotalController = TextEditingController(text: '0.00');
   TextEditingController discountAmountController = TextEditingController(text: '0.00');
   TextEditingController discountPercentController = TextEditingController(text: '0');
